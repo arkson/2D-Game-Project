@@ -467,8 +467,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa3a5ccff6974c889ad958fd4363356, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hMaxSpeed: 10
-  vMaxSpeed: 10
+  hMaxSpeed: 2.5
+  vMaxSpeed: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
