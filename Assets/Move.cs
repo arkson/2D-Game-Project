@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Move : MonoBehaviour
 {
-    [SerializeField] float moveSpeed;
+    [SerializeField] float hMaxSpeed;
+    [SerializeField] float vMaxSpeed;
     float vertical, horizontal;
     Rigidbody2D myRigidBody2D;
 
@@ -24,6 +25,6 @@ public class Move : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
-        myRigidBody2D.velocity = new Vector2(horizontal * moveSpeed, vertical * moveSpeed);
+        myRigidBody2D.velocity = new Vector2(horizontal * hMaxSpeed, vertical * vMaxSpeed);
     }
 }
