@@ -1,12 +1,16 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 
 [RequireComponent(typeof(PolygonCollider2D))]
-[RequireComponent(typeof(LineRenderer))]
-public class ColliderPainter : MonoBehaviour {
+public class ColliderPainter : MonoBehaviour
+{
+
+	public GameObject prefab;
 	void Start() {
-		var renderer = GetComponent<LineRenderer>();
 		var polygon = GetComponent<PolygonCollider2D>();
+		var floor = Instantiate(prefab);
+		var renderer = floor.GetComponent<LineRenderer>();
 
 		var path = polygon.GetPath(0);
 
