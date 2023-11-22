@@ -20,7 +20,7 @@ public class BoundaryController : MonoBehaviour {
 
 	void OnTriggerExit2D(Collider2D floor) {
 		_moveBehavior.inFloor = false;
-		_moveBehavior.closestPoint = floor.ClosestPoint(_rigidBody.position);
+		_moveBehavior.floor = floor;
 	}
 
 	private void OnTriggerEnter2D(Collider2D other) {
