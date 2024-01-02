@@ -13,14 +13,6 @@ public class ColliderPainter : MonoBehaviour {
 
 		var moveController = GameObject.Find("Player")?.GetComponent<MoveController>();
 		if (moveController) {
-			moveController.OnFloorChanged1 += index => { Debug.Log("handling floorChanged1 in painter"); };
-			moveController.OnFloorChanged2 += index => { Debug.Log("handling floorChanged2 in painter"); };
-
-			moveController.OnFloorChanged1(0); // raising from outside allowed
-			// moveController.OnFloorChanged2(0); // raising from outside errors
-
-			moveController.OnFloorChanged1 = null; // clearing subscribers from outside allowed
-			// moveController.OnFloorChanged2 = null; // clearing subscribers from outside errors
 		}
 
 		var k = 0;
