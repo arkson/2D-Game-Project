@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using UnityEngine;
 
@@ -13,11 +14,14 @@ public class MoveController : MonoBehaviour {
 
 	private Rigidbody2D _rigidBody;
 	private PolygonCollider2D _currentFloor;
+	private PolygonCollider2D[] _availableFloors;
 	public event FloorChangedHandler OnFloorChanged;
 
 	void Start() {
 		_rigidBody = GetComponent<Rigidbody2D>();
 		_currentFloor = ground.GetComponent<PolygonCollider2D>();
+		_availableFloors = ground.GetComponents<PolygonCollider2D>();
+		OnFloorChanged?.Invoke(0);
 	}
 
 	void Update() {
@@ -40,20 +44,16 @@ public class MoveController : MonoBehaviour {
 		var inFloor = _currentFloor.OverlapPoint(attemptedPosition);
 		if (!inFloor)
 		{
-			var nextFloor = FindNextGround(attemptedPosition);
-			if (!nextFloor)
+			var nextIndex = Array.FindIndex(_availableFloors,
+				floor => floor != _currentFloor && floor.OverlapPoint(attemptedPosition));
+			if (nextIndex == -1)
 			{
 				return _currentFloor.ClosestPoint(attemptedPosition);
-
 			}
-			_currentFloor = nextFloor;
+
+			_currentFloor = _availableFloors[nextIndex];
+			OnFloorChanged?.Invoke(nextIndex);
 		}
 		return attemptedPosition;
-	}
-
-	PolygonCollider2D FindNextGround(Vector2 attemptedPosition)
-	{
-		var floors = ground.GetComponents<PolygonCollider2D>();
-		return floors.Where(floor => floor != _currentFloor).FirstOrDefault(floor => floor.OverlapPoint(attemptedPosition));
 	}
 }

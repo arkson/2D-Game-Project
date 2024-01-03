@@ -12,7 +12,15 @@ public class ColliderPainter : MonoBehaviour {
 		_renderers = new LineRenderer[polygons.Length];
 
 		var moveController = GameObject.Find("Player")?.GetComponent<MoveController>();
-		if (moveController) {
+		if (moveController)
+		{
+			var prevIndex = 0;
+			moveController.OnFloorChanged += index =>
+			{
+				_renderers[prevIndex].startColor = _renderers[prevIndex].endColor = Color.blue;
+				_renderers[index].startColor = _renderers[index].endColor = Color.red;
+				prevIndex = index;
+			};
 		}
 
 		var k = 0;
